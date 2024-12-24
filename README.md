@@ -41,4 +41,7 @@ npm start
 ```
 
 ## License
-Distributed under the MIT License.
+Distributed under the MIT License. See the `LICENSE` file for more information.
+```bash
+This `README.md` is set up to help users understand what the project does, how to get it set up, and how to run it. It provides clear instructions on installation and usage, which are crucial for practical projects like this.
+```
