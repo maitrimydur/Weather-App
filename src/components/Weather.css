@@ -51,7 +51,7 @@
 }
 .weather-data .col{
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     gap: 12px;
     font-size: 22px;
 }
@@ -60,6 +60,9 @@
     font-size: 16px;
 }
 .weather-data .col img{
-    width: 26px;
+    width: 52px;
     margin-top: 10px;
+}
+.icon-humidity, .icon-wind {
+    width: 52px;
 }
