@@ -38,3 +38,7 @@ To get this project running on your local machine, follow these steps:
 To start the server and run the app:
 ```bash
 npm start
+```
+
+## License
+Distributed under the MIT License.
