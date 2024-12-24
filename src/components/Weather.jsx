@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'; // Include useState here
+import React, { useEffect, useState, useRef } from 'react';
 import './Weather.css';
 import search_icon from '../assets/search.png';
 import clear_icon from '../assets/clear.png';
@@ -10,7 +10,8 @@ import snow_icon from '../assets/snow.png';
 import wind_icon from '../assets/wind.png';
 
 const Weather = () => {
-    const [weatherData, setWeatherData] = useState(null); // Initialize to null for better handling
+    const inputRef = useRef();
+    const [weatherData, setWeatherData] = useState(null); 
 
     const allIcons = {
         "01d": clear_icon,
@@ -30,6 +31,10 @@ const Weather = () => {
     };
 
     const search = async (city) => {
+        if (city === "") {
+            alert("Enter City Name");
+            return;
+        }
         try {
             const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${import.meta.env.VITE_APP_ID}`;
             const response = await fetch(url);
@@ -37,17 +42,18 @@ const Weather = () => {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
             const data = await response.json();
+
             const icon = allIcons[data.weather[0].icon] || clear_icon;
             setWeatherData({
                 humidity: data.main.humidity,
                 windSpeed: data.wind.speed,
-                temperature: Math.round(data.main.temp), // Correct conversion method
+                temperature: Math.round(data.main.temp),
                 location: data.name,
                 icon: icon
             });
         } catch (error) {
-            console.error('Failed to fetch weather data:', error);
-            setWeatherData(null); // Handle error by resetting state or setting an error state
+            console.error("Error in fetching weather data:", error);
+            setWeatherData(null); 
         }
     };
 
@@ -56,14 +62,14 @@ const Weather = () => {
     }, []);
 
     if (!weatherData) {
-        return <div>Loading...</div>; // Handle loading state
+        return <div>Loading...</div>; 
     }
 
     return (
         <div className='weather'>
             <div className="search-bar">
-                <input type="text" placeholder='Search' />
-                <img src={search_icon} alt="Search Icon" />
+                <input ref={inputRef} type="text" placeholder='Search' />
+                <img src={search_icon} alt="Search Icon" onClick={() => search(inputRef.current.value)} />
             </div>
             <img src={weatherData.icon} alt="Weather Icon" className='weather-icon' />
             <p className='temperature'>{`${weatherData.temperature}°F`}</p>
@@ -79,7 +85,7 @@ const Weather = () => {
                 <div className="col">
                     <img src={wind_icon} alt="Wind Icon" />
                     <div>
-                        <p>{`${weatherData.windSpeed} Km/h`}</p>
+                        <p>{`${weatherData.windSpeed} mph`}</p>
                         <span>Wind Speed</span>
                     </div>
                 </div>
