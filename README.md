@@ -24,3 +24,12 @@ To get this project running on your local machine, follow these steps:
 1. Clone the repository:
    ```bash
    git clone https://github.com/yourusername/weather-app.git
+2. Navigate to the project directory:
+   ```bash
+   cd weather-app
+3. Install dependencies:
+   ```bash
+   npm install
+4. Set your API key:
+   - Create a .env file in the root directory
+   - Add your OpenWeatherMap API key as VITE_APP_ID=your_api_key_here
