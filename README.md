@@ -33,3 +33,8 @@ To get this project running on your local machine, follow these steps:
 4. Set your API key:
    - Create a `.env` file in the root directory.
    - Add your OpenWeatherMap API key as `VITE_APP_ID=your_api_key_here`.
+
+## Usage
+To start the server and run the app:
+```bash
+npm start
